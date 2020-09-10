@@ -1,0 +1,49 @@
+{% load static %}
+<!--Fashion-blog-start-->
+    <section id="blog-one">
+        <div class="container">
+            <div class="card">
+                <h3 class="blog-heder">Fashion Blogs</h3>
+                <div class="row"> 
+                    <div class="col-md-7">
+                        {% for blog in fashion_blog %}
+                            {% if forloop.counter == 1 %}
+                            <img src="{{ blog.image.url }}" alt="img-fluid" class="blog-one-img">
+                                <div class="blog-one-body">
+                                    <h2>{{ blog.title }}</h2>
+                                    <p>
+                                        {{ blog.highlight }}
+                                    </p>
+                                    <div class="card-footer">
+                                        {{ blog.author}} | {{ blog.created_at }}
+                                    </div>
+                                    <a href="{{ blog.get_absolute_url }}" class="btnone">See More>></a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-5">
+                        <div class="container">
+                            {% for blog in fashion_blog %}
+                                {% if forloop.counter != 5%}
+                                    <div class="side-box">
+                                        <a href="{{ blog.get_absolute_url }}">
+                                            <img src="{{ blog.image.url }}" alt="img-fluid" >&nbsp;&nbsp;
+                                            <h5>{{ blog.title }}</h5>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for blog in fashion_blog %}
+                                {% if forloop.counter == 1 %}
+                                    <a href="{% url 'category_blog' category=blog.get_category_display %}" class="btntwo">See all</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Fashion-blog-end-->
